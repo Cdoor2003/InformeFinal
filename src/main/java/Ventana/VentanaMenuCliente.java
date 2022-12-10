@@ -1,9 +1,13 @@
 package Ventana;
 
+import GestorDatos.GestorDatos;
+import Tienda.Producto;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class VentanaMenuCliente extends JFrame {
     private JPanel panel;
@@ -70,6 +74,16 @@ public class VentanaMenuCliente extends JFrame {
         botonComprarProducto.setForeground(Color.black);
         botonComprarProducto.setFont(new Font("cooper black",1,12));
         panel.add(botonComprarProducto);
+
+        ActionListener eventoClick = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                VentanaComprarProducto ventanaComprarProducto = new VentanaComprarProducto();
+                ventanaComprarProducto.setVisible(true);
+            }
+        };
+        botonComprarProducto.addActionListener(eventoClick);
     }
 
     public void generarBotonBuscarProducto(){
@@ -79,6 +93,16 @@ public class VentanaMenuCliente extends JFrame {
         botonBuscarProducto.setForeground(Color.black);
         botonBuscarProducto.setFont(new Font("cooper black",1,12));
         panel.add(botonBuscarProducto);
+
+        ActionListener eventoClick = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                VentanaBuscarProductos ventanaBuscarProductos = new VentanaBuscarProductos();
+                ventanaBuscarProductos.setVisible(true);
+            }
+        };
+        botonBuscarProducto.addActionListener(eventoClick);
     }
 
     public void generarBotonMostrarProducto(){
@@ -88,5 +112,15 @@ public class VentanaMenuCliente extends JFrame {
         botonMostrarProductos.setForeground(Color.black);
         botonMostrarProductos.setFont(new Font("cooper black",1,12));
         panel.add(botonMostrarProductos);
+
+        ActionListener eventoClick = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                VentanaMostrarProducto ventanaMostrarProducto = new VentanaMostrarProducto();
+                ventanaMostrarProducto.setVisible(true);
+            }
+        };
+        botonMostrarProductos.addActionListener(eventoClick);
     }
 }
