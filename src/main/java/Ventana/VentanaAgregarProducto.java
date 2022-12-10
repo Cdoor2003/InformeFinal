@@ -34,6 +34,7 @@ public class VentanaAgregarProducto extends JFrame {
         panel.setBackground(Color.white);
         this.getContentPane().add(panel);
     }
+
     public void agregarProducto(){
         JLabel etiqueta = new JLabel();
         etiqueta.setText("Ingrese el nombre del producto");

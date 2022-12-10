@@ -6,10 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class VentanaMenuPropietario extends JFrame {
-    private JPanel panel, panel2;
-    private JButton botonPrimeraContraseña;
-    private JTextField txtContraseña;
-    private JLabel etiqueta1;
+    private JPanel panel;
 
     public VentanaMenuPropietario(){
         setTitle("Menú Propietario");

@@ -11,8 +11,6 @@ import java.util.ArrayList;
 
 public class VentanaMostrarProducto extends JFrame {
     private JPanel panel;
-    private JTextField cantidad;
-    private JComboBox listaDesplegable;
 
     public VentanaMostrarProducto() {
         setTitle("Lista de productos");
@@ -48,7 +46,7 @@ public class VentanaMostrarProducto extends JFrame {
 
     public void mostrarProductos(){
         DefaultComboBoxModel modelo = new DefaultComboBoxModel();
-        listaDesplegable = new JComboBox(modelo);
+        JComboBox listaDesplegable = new JComboBox(modelo);
         ArrayList<Producto> listaDeProductos = new ArrayList<>();
         listaDeProductos = GestorDatos.leerArchivoProductos();
         for(Producto producto: listaDeProductos){
