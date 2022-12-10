@@ -48,42 +48,23 @@ public class VentanaMenuCliente extends JFrame {
         panel.add(etiqueta);
     }
 
-    public void generarBotonSalir(){
-        botonSalir = new JButton();
-        botonSalir.setText("Salir");
-        botonSalir.setBounds(135,330,200,40);
-        botonSalir.setForeground(Color.black);
-        botonSalir.setFont(new Font("cooper black",1,15));
-        panel.add(botonSalir);
+    public void generarBotonMostrarProducto(){
+        botonMostrarProductos = new JButton();
+        botonMostrarProductos.setText("Mostrar productos");
+        botonMostrarProductos.setBounds(135,150,200,40);
+        botonMostrarProductos.setForeground(Color.black);
+        botonMostrarProductos.setFont(new Font("cooper black",1,12));
+        panel.add(botonMostrarProductos);
 
         ActionListener eventoClick = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                VentanaPrincipal ventanaPrincipal = new VentanaPrincipal();
-                ventanaPrincipal.setVisible(true);
+                VentanaMostrarProducto ventanaMostrarProducto = new VentanaMostrarProducto();
+                ventanaMostrarProducto.setVisible(true);
             }
         };
-        botonSalir.addActionListener(eventoClick);
-    }
-
-    public void generarBotonComprarProducto(){
-        botonComprarProducto = new JButton();
-        botonComprarProducto.setText("Comprar producto");
-        botonComprarProducto.setBounds(135,270,200,40);
-        botonComprarProducto.setForeground(Color.black);
-        botonComprarProducto.setFont(new Font("cooper black",1,12));
-        panel.add(botonComprarProducto);
-
-        ActionListener eventoClick = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                dispose();
-                VentanaComprarProducto ventanaComprarProducto = new VentanaComprarProducto();
-                ventanaComprarProducto.setVisible(true);
-            }
-        };
-        botonComprarProducto.addActionListener(eventoClick);
+        botonMostrarProductos.addActionListener(eventoClick);
     }
 
     public void generarBotonBuscarProducto(){
@@ -105,22 +86,41 @@ public class VentanaMenuCliente extends JFrame {
         botonBuscarProducto.addActionListener(eventoClick);
     }
 
-    public void generarBotonMostrarProducto(){
-        botonMostrarProductos = new JButton();
-        botonMostrarProductos.setText("Mostrar productos");
-        botonMostrarProductos.setBounds(135,150,200,40);
-        botonMostrarProductos.setForeground(Color.black);
-        botonMostrarProductos.setFont(new Font("cooper black",1,12));
-        panel.add(botonMostrarProductos);
+    public void generarBotonComprarProducto(){
+        botonComprarProducto = new JButton();
+        botonComprarProducto.setText("Comprar producto");
+        botonComprarProducto.setBounds(135,270,200,40);
+        botonComprarProducto.setForeground(Color.black);
+        botonComprarProducto.setFont(new Font("cooper black",1,12));
+        panel.add(botonComprarProducto);
 
         ActionListener eventoClick = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                VentanaMostrarProducto ventanaMostrarProducto = new VentanaMostrarProducto();
-                ventanaMostrarProducto.setVisible(true);
+                VentanaComprarProducto ventanaComprarProducto = new VentanaComprarProducto();
+                ventanaComprarProducto.setVisible(true);
             }
         };
-        botonMostrarProductos.addActionListener(eventoClick);
+        botonComprarProducto.addActionListener(eventoClick);
+    }
+
+    public void generarBotonSalir(){
+        botonSalir = new JButton();
+        botonSalir.setText("Salir");
+        botonSalir.setBounds(135,330,200,40);
+        botonSalir.setForeground(Color.black);
+        botonSalir.setFont(new Font("cooper black",1,15));
+        panel.add(botonSalir);
+
+        ActionListener eventoClick = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                VentanaPrincipal ventanaPrincipal = new VentanaPrincipal();
+                ventanaPrincipal.setVisible(true);
+            }
+        };
+        botonSalir.addActionListener(eventoClick);
     }
 }

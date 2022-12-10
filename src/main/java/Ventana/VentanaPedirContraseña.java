@@ -30,7 +30,7 @@ public class VentanaPedirContraseña extends JFrame {
     public void pedirContraseña(){
         JLabel etiqueta = new JLabel();
         etiqueta.setText("Ingrese la contraseña");
-        etiqueta.setBounds(85,50,300,80);
+        etiqueta.setBounds(90,50,300,80);
         etiqueta.setHorizontalAlignment(SwingConstants.CENTER);
         etiqueta.setForeground(Color.BLACK);
         etiqueta.setFont(new Font("cooper black",1,17));
@@ -58,9 +58,7 @@ public class VentanaPedirContraseña extends JFrame {
                     VentanaMenuPropietario ventanaMenuPropietario = new VentanaMenuPropietario();
                     ventanaMenuPropietario.setVisible(true);
                 }else{
-                    dispose();
-                    VentanaPrincipal ventanaPrincipal = new VentanaPrincipal();
-                    ventanaPrincipal.setVisible(true);
+                    JOptionPane.showMessageDialog(null,"La contraseña es incorrecta, inténtelo de nuevo");
                 }
             }
         };

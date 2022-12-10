@@ -38,7 +38,7 @@ public class VentanaBuscarProductos extends JFrame {
 
     public void etiquetaBuscarProductos(){
         JLabel etiqueta = new JLabel();
-        etiqueta.setText("Buscar de productos");
+        etiqueta.setText("Buscar productos");
         etiqueta.setBounds(85,50,300,80);
         etiqueta.setHorizontalAlignment(SwingConstants.CENTER);
         etiqueta.setForeground(Color.BLACK);
@@ -70,30 +70,29 @@ public class VentanaBuscarProductos extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Tienda tienda = new Tienda();
-                ArrayList<Producto> listaDeProductos = new ArrayList<>();
-                listaDeProductos = GestorDatos.leerArchivoProductos();
+                ArrayList<Producto> listaDeProductos = GestorDatos.leerArchivoProductos();
                 String nombreProducto = cajaTexto.getText();
                 Producto producto = tienda.buscarProducto(nombreProducto,listaDeProductos);
                 if(producto != null){
-                    JLabel etiqueta1 = new JLabel();
-                    etiqueta1.setText("Cantidad del Producto: "+producto.getCantidad());
-                    etiqueta1.setBounds(85,300,300,80);
-                    etiqueta1.setHorizontalAlignment(SwingConstants.CENTER);
-                    etiqueta1.setForeground(Color.BLACK);
-                    etiqueta1.setFont(new Font("cooper black",1,20));
-                    panel.add(etiqueta1);
+                    JOptionPane.showMessageDialog(null,"Cantidad disponible: "+producto.getCantidad()+"\nPrecio por unidad: "+producto.getPrecioUnidad());
+                    JButton boton2 = new JButton();
+                    boton2.setText("Volver");
+                    boton2.setBounds(135,300,200,40);
+                    boton2.setForeground(Color.black);
+                    boton2.setFont(new Font("cooper black",1,12));
+                    panel.add(boton2);
 
-                    JLabel etiqueta2 = new JLabel();
-                    etiqueta2.setText("Precio del producto: "+producto.getPrecioUnidad());
-                    etiqueta2.setBounds(85,350,300,80);
-                    etiqueta2.setHorizontalAlignment(SwingConstants.CENTER);
-                    etiqueta2.setForeground(Color.BLACK);
-                    etiqueta2.setFont(new Font("cooper black",1,20));
-                    panel.add(etiqueta2);
+                    ActionListener eventoClick2 = new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            dispose();
+                            VentanaMenuCliente ventanaMenuCliente = new VentanaMenuCliente();
+                            ventanaMenuCliente.setVisible(true);
+                        }
+                    };
+                    boton2.addActionListener(eventoClick2);
                 }else{
-                    dispose();
-                    VentanaMenuCliente ventanaMenuCliente = new VentanaMenuCliente();
-                    ventanaMenuCliente.setVisible(true);
+                    JOptionPane.showMessageDialog(null,"El producto que busca no se encuentra en el inventario");
                 }
             }
         };

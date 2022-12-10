@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 
 public class VentanaCambiarContraseña extends JFrame {
     private JPanel panel;
+    private JTextField txtContraseña;
 
     public VentanaCambiarContraseña() {
         setTitle("Cambiar contraseña");
@@ -40,7 +41,7 @@ public class VentanaCambiarContraseña extends JFrame {
         etiqueta.setFont(new Font("cooper black",1,20));
         panel.add(etiqueta);
 
-        JTextField txtContraseña = new JTextField();
+        txtContraseña = new JTextField();
         txtContraseña.setBounds(150,120,200,40);
         panel.add(txtContraseña);
 
@@ -55,11 +56,16 @@ public class VentanaCambiarContraseña extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Tienda tienda = new Tienda();
+                tienda.setContraseña(tienda.leerContraseña("Contraseña.txt"));
                 String nuevaContraseña = txtContraseña.getText();
-                tienda.guardarContraseña(nuevaContraseña);
-                dispose();
-                VentanaMenuPropietario ventanaMenuPropietario = new VentanaMenuPropietario();
-                ventanaMenuPropietario.setVisible(true);
+                if(nuevaContraseña.equals(tienda.getContraseña())){
+                    JOptionPane.showMessageDialog(null,"La nueva contraseña no puede ser igual a la anterior");
+                }else{
+                    tienda.guardarContraseña(nuevaContraseña);
+                    dispose();
+                    VentanaMenuPropietario ventanaMenuPropietario = new VentanaMenuPropietario();
+                    ventanaMenuPropietario.setVisible(true);
+                }
             }
         };
         botonAceptarContraseña.addActionListener(eventoClick);

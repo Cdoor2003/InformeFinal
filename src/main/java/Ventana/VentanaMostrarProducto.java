@@ -5,10 +5,14 @@ import Tienda.Producto;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class VentanaMostrarProducto extends JFrame {
     private JPanel panel;
+    private JTextField cantidad;
+    private JComboBox listaDesplegable;
 
     public VentanaMostrarProducto() {
         setTitle("Lista de productos");
@@ -44,13 +48,30 @@ public class VentanaMostrarProducto extends JFrame {
 
     public void mostrarProductos(){
         DefaultComboBoxModel modelo = new DefaultComboBoxModel();
-        JComboBox listaDesplegable = new JComboBox(modelo);
+        listaDesplegable = new JComboBox(modelo);
         ArrayList<Producto> listaDeProductos = new ArrayList<>();
         listaDeProductos = GestorDatos.leerArchivoProductos();
         for(Producto producto: listaDeProductos){
             modelo.addElement(producto.getNombre());
         }
-        listaDesplegable.setBounds(140,150,200,30);
+        listaDesplegable.setBounds(140,200,200,30);
         panel.add(listaDesplegable);
+
+        JButton boton = new JButton();
+        boton.setText("Volver");
+        boton.setBounds(135,300,200,40);
+        boton.setForeground(Color.black);
+        boton.setFont(new Font("cooper black",1,12));
+        panel.add(boton);
+
+        ActionListener eventoClick = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                VentanaMenuCliente ventanaMenuCliente = new VentanaMenuCliente();
+                ventanaMenuCliente.setVisible(true);
+            }
+        };
+        boton.addActionListener(eventoClick);
     }
 }

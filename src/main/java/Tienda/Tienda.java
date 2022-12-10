@@ -4,8 +4,10 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Scanner;
+
 import GestorDatos.GestorDatos;
+
+import javax.swing.*;
 
 public class Tienda {
     private String contraseña;
@@ -18,8 +20,8 @@ public class Tienda {
             FileReader fr = new FileReader(archivo);
             BufferedReader br = new BufferedReader(fr);
             while ((textoArchivo = br.readLine()) != null) {
-                String[] data = textoArchivo.split(",");
-                contraseña = data[0];
+                String data = textoArchivo;
+                contraseña = data;
             }
             br.close();
             fr.close();
@@ -68,6 +70,22 @@ public class Tienda {
             }
         }
         return null;
+    }
+
+    public void venderProducto(Producto producto , int cantidad) {
+        ArrayList<Producto> listaDeProductos = GestorDatos.leerArchivoProductos();
+        Producto producto1 = buscarProducto(producto.getNombre(), listaDeProductos);
+        if(producto1.getCantidad() >= cantidad){
+            producto1.setCantidad(producto1.getCantidad()-cantidad);
+            GestorDatos.registrarDatos(listaDeProductos,"Productos.txt");
+        }else{
+            JOptionPane.showMessageDialog(null,"La cantidad sobrepasa la disponible: "+producto.getCantidad());
+        }
+        if(producto.getCantidad() == 0){
+            listaDeProductos.remove(producto);
+            GestorDatos.registrarDatos(listaDeProductos,"Productos.txt");
+        }
+
     }
 
     public static ArrayList<Producto> getListaProductos() {

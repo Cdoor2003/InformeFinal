@@ -1,5 +1,6 @@
 package Ventana;
 
+import GestorDatos.GestorDatos;
 import Tienda.Tienda;
 import Tienda.Producto;
 
@@ -7,9 +8,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class VentanaAgregarProducto extends JFrame {
     private JPanel panel;
+    private JTextField nombreProducto;
 
     public VentanaAgregarProducto() {
         setTitle("Menú Propietario");
@@ -40,7 +43,7 @@ public class VentanaAgregarProducto extends JFrame {
         etiqueta.setFont(new Font("cooper black",1,20));
         panel.add(etiqueta);
 
-        JTextField nombreProducto = new JTextField();
+        nombreProducto = new JTextField();
         nombreProducto.setBounds(100,100,300,40);
         panel.add(nombreProducto);
 
@@ -79,11 +82,17 @@ public class VentanaAgregarProducto extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Tienda tienda = new Tienda();
+                ArrayList<Producto> listaDeProducto = GestorDatos.leerArchivoProductos();
                 Producto producto = new Producto(nombreProducto.getText(),Integer.parseInt(precioUnidad.getText()),Integer.parseInt(cantidadProducto.getText()));
-                tienda.agregarProducto(producto);
-                dispose();
-                VentanaMenuPropietario ventanaMenuPropietario = new VentanaMenuPropietario();
-                ventanaMenuPropietario.setVisible(true);
+                Producto producto1 = tienda.buscarProducto(nombreProducto.getText(),listaDeProducto);
+                if(producto1 == null){
+                    tienda.agregarProducto(producto);
+                    dispose();
+                    VentanaMenuPropietario ventanaMenuPropietario = new VentanaMenuPropietario();
+                    ventanaMenuPropietario.setVisible(true);
+                }else{
+                    JOptionPane.showMessageDialog(null,"El producto ya existe en el inventario");
+                }
             }
         };
         botonAceptarContraseña.addActionListener(eventoClick);

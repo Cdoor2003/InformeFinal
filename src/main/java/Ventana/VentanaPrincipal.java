@@ -1,17 +1,14 @@
 package Ventana;
 
-import Tienda.Tienda;
+import Tienda.MenuPrincipal;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 
 public class VentanaPrincipal extends JFrame {
     private JPanel panel;
-    private JButton botonMenuPropietario;
-    private JButton botonMenuCliente;
 
     public VentanaPrincipal() {
         setTitle("Menú Principal");
@@ -56,7 +53,7 @@ public class VentanaPrincipal extends JFrame {
     }
 
     public void generarBotonMenuPropietario(){
-        botonMenuPropietario = new JButton();
+        JButton botonMenuPropietario = new JButton();
         botonMenuPropietario.setText("Menú Propietario");
         botonMenuPropietario.setBounds(110,200,250,40);
         botonMenuPropietario.setForeground(Color.black);
@@ -66,16 +63,24 @@ public class VentanaPrincipal extends JFrame {
         ActionListener irMenuPropietario = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                dispose();
-                VentanaPedirContraseña ventanaPedirContraseña = new VentanaPedirContraseña();
-                ventanaPedirContraseña.setVisible(true);
+                MenuPrincipal menuPrincipal = new MenuPrincipal();
+                String contraseña = menuPrincipal.contraseñaExiste();
+                if(contraseña != null){
+                    dispose();
+                    VentanaPedirContraseña ventanaPedirContraseña = new VentanaPedirContraseña();
+                    ventanaPedirContraseña.setVisible(true);
+                }else{
+                    dispose();
+                    VentanaPrimeraContraseña ventanaPrimeraContraseña = new VentanaPrimeraContraseña();
+                    ventanaPrimeraContraseña.setVisible(true);
+                }
             }
         };
         botonMenuPropietario.addActionListener(irMenuPropietario);
     }
 
     public void generarBotonMenuCliente(){
-        botonMenuCliente = new JButton();
+        JButton botonMenuCliente = new JButton();
         botonMenuCliente.setText("Menú Cliente");
         botonMenuCliente.setBounds(110,300,250,40);
         botonMenuCliente.setForeground(Color.black);
@@ -88,7 +93,6 @@ public class VentanaPrincipal extends JFrame {
                 dispose();
                 VentanaMenuCliente ventanaMenuCliente = new VentanaMenuCliente();
                 ventanaMenuCliente.setVisible(true);
-
             }
         };
         botonMenuCliente.addActionListener(irMenuCliente);

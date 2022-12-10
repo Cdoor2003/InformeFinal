@@ -1,13 +1,10 @@
 package Tienda;
 
 public class MenuPrincipal {
-    public boolean contraseñaExiste(){
+    public String contraseñaExiste(){
         Tienda tienda = new Tienda();
         String contraseña;
         contraseña = tienda.leerContraseña("Contraseña.txt");
-        if(contraseña != null){
-            return true;
-        }
-        return false;
+        return contraseña;
     }
 }

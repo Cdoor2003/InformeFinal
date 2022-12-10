@@ -2,6 +2,7 @@ package Ventana;
 
 import Tienda.Producto;
 import GestorDatos.GestorDatos;
+import Tienda.Tienda;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,7 +13,9 @@ import java.util.ArrayList;
 
 public class VentanaComprarProducto extends JFrame {
     private JPanel panel;
-    private JButton boton;
+    private ArrayList<Producto> listaDeProductos;
+    private JTextField nombreProducto, cantidad;
+    private Producto producto;
 
     public VentanaComprarProducto(){
         setTitle("Comprar productos");
@@ -47,7 +50,6 @@ public class VentanaComprarProducto extends JFrame {
     }
 
     public void comprarProducto(){
-        ArrayList<Producto> listaDeProductos = new ArrayList<>();
         listaDeProductos = GestorDatos.leerArchivoProductos();
 
         JLabel etiqueta = new JLabel();
@@ -58,7 +60,7 @@ public class VentanaComprarProducto extends JFrame {
         etiqueta.setFont(new Font("cooper black",1,20));
         panel.add(etiqueta);
 
-        JTextField nombreProducto = new JTextField();
+        nombreProducto = new JTextField();
         nombreProducto.setBounds(100,150,300,40);
         panel.add(nombreProducto);
 
@@ -70,7 +72,7 @@ public class VentanaComprarProducto extends JFrame {
         etiqueta2.setFont(new Font("cooper black",1,20));
         panel.add(etiqueta2);
 
-        JTextField cantidad = new JTextField();
+        cantidad = new JTextField();
         cantidad.setBounds(100,250,300,40);
         panel.add(cantidad);
 
@@ -84,9 +86,21 @@ public class VentanaComprarProducto extends JFrame {
         ActionListener eventoClick = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                Tienda tienda = new Tienda();
+                for(Producto producto1: listaDeProductos){
+                    producto = tienda.buscarProducto(nombreProducto.getText(),listaDeProductos);
+                }
+                JOptionPane.showMessageDialog(null,"El precio total es de: "+(producto.getPrecioUnidad() * Integer.parseInt(cantidad.getText())));
+                tienda.venderProducto(producto,Integer.parseInt(cantidad.getText()));
+                int i = JOptionPane.showConfirmDialog(null,"¿Desea continuar?");
                 dispose();
-                VentanaBoleto ventanaBoleto = new VentanaBoleto(nombreProducto.getText(),Integer.parseInt(cantidad.getText()));
-                ventanaBoleto.setVisible(true);
+                if(i == 0){
+                    VentanaMenuCliente ventanaMenuCliente = new VentanaMenuCliente();
+                    ventanaMenuCliente.setVisible(true);
+                }else if(i ==1){
+                    VentanaPrincipal ventanaPrincipal = new VentanaPrincipal();
+                    ventanaPrincipal.setVisible(true);
+                }
             }
         };
         boton.addActionListener(eventoClick);
